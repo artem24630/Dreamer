@@ -4,8 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:menu="main"
-    tools:context="ru.atproduction.dreamer.MainActivity">
+    tools:context="ru.atproduction.dreamer.MainActivity"
+    tools:menu="main">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="390dp"
+        android:layout_height="313dp"
+        android:layout_marginBottom="8dp"
+        android:alpha="0.25"
+
+        android:contentDescription="@string/cloud"
+        android:scaleType="centerCrop"
+        android:scaleX="0.7"
+        android:scaleY="0.7"
+        app:layout_constraintBottom_toBottomOf="@+id/include"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.992"
+        app:layout_constraintStart_toEndOf="@+id/listView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/clouds" />
+
+
+
+
+
 
 
     <ListView
@@ -21,19 +48,5 @@
         android:id="@+id/include"
         layout="@layout/activity_bottom_sheet" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="303dp"
-        android:layout_marginBottom="8dp"
-        android:contentDescription="@string/cloud"
-        android:scaleType="center"
-        app:layout_constraintBottom_toBottomOf="@+id/include"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.145"
-        app:srcCompat="@drawable/clouds" />
 
 </android.support.constraint.ConstraintLayout>

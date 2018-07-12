@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         // создаем адаптер и настраиваем список
         scAdapter = new android.support.v4.widget.SimpleCursorAdapter(this, R.layout.item, null, from, to, 0);
         lvData = (ListView) findViewById(R.id.listView);
+
         lvData.setAdapter(scAdapter);
 
 
@@ -153,10 +154,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
-    public void cancelRepeatingTimer(int id) {
+    public void cancelRepeatingTimer(int a, String name, int id) {
         Context context = this.getApplicationContext();
         if (alarm != null) {
-            alarm.CancelAlarm(context,id);
+            alarm.CancelAlarm(context,a,name,id);
         } else {
             Toast.makeText(context, "Alarm is null", Toast.LENGTH_SHORT).show();
         }
@@ -247,11 +248,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 Toast toast = Toast.makeText(MainActivity.this, "Ошибка ", Toast.LENGTH_LONG);
                 toast.show();
             }
-
+            int a = db.getA(ids);
+            if(a==-1){
+                Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+            }else{
 
             db.delRec(acmi.id);
             getSupportLoaderManager().getLoader(0).forceLoad();
-            cancelRepeatingTimer(ids);
+            cancelRepeatingTimer(a,nm,ids);
+            }
             return true;
         }
         return super.onContextItemSelected(item);

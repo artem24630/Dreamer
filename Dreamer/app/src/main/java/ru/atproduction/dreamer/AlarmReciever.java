@@ -42,7 +42,7 @@ public class AlarmReciever extends BroadcastReceiver {
     long time2;
     Calendar tm1;
     Calendar tm2;
-
+    AlarmManager am;
 
 
     @Override
@@ -95,7 +95,7 @@ public class AlarmReciever extends BroadcastReceiver {
     }
 
     public void SetAlarm(Context context, int a, String name, int id) {
-        AlarmManager am=(AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+       am = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
 
 
         Intent intent=new Intent(context, AlarmReciever.class);
@@ -175,8 +175,12 @@ public class AlarmReciever extends BroadcastReceiver {
 
     }
 
-    public void CancelAlarm(Context context,int id) {
+    public void CancelAlarm(Context context, int a, String name, int id) {
+
         Intent intent=new Intent(context, AlarmReciever.class);
+        intent.putExtra("time",a);
+        intent.putExtra("id",id);
+        intent.putExtra("name", name);
         PendingIntent sender= PendingIntent.getBroadcast(context,id, intent,0);
         AlarmManager alarmManager=(AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.cancel(sender);//Отменяем будильник, связанный с интентом данного класса

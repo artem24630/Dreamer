@@ -61,6 +61,24 @@ public class DB {
         return id;
     }
 
+    public int getA(int id){
+        Cursor cursor = mDB.rawQuery("SELECT * FROM " +DB_TABLE + " WHERE _id = " + id,null);
+        String textFromDB=null;
+        int a=-1;
+        if(cursor.moveToFirst()) {
+            int id2 = cursor.getColumnIndex("txt");
+           textFromDB = cursor.getString(id2);
+        }
+cursor.close();
+        switch (textFromDB){
+            case "every 15 min":a=0;break;
+            case "every 30 min":a=1;break;
+            case "every hour":a=2;break;
+            case "every 4 hours":a=3;break;
+            case "once in 3 days":a=4;break;
+        }
+    return a;
+    }
     // добавить запись в DB_TABLE
     public long addRec(String txt, String name) {
         mDB.execSQL("update sqlite_sequence set " +

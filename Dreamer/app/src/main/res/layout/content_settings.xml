@@ -49,34 +49,33 @@
         android:layout_width="49dp"
         android:layout_height="27dp"
         android:layout_marginBottom="382dp"
-        android:layout_marginEnd="23dp"
-        android:layout_marginStart="31dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="18dp"
         android:text="@string/from"
         android:textSize="20sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textClock2"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switch2"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextClock
-        android:id="@+id/textClock2"
-        android:layout_width="77dp"
-
-        android:layout_height="26dp"
-        android:layout_marginBottom="382dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="18dp"
-        android:onClick="SetClock2"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView5"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/switch2"
-        app:layout_constraintVertical_bias="0.0" />
+    <!--<TextClock-->
+    <!--android:id="@+id/textClock2"-->
+    <!--android:layout_width="77dp"-->
+    <!--android:format12Hour="hh:mm"-->
+    <!--android:layout_height="26dp"-->
+    <!--android:layout_marginBottom="382dp"-->
+    <!--android:layout_marginEnd="28dp"-->
+    <!--android:layout_marginStart="23dp"-->
+    <!--android:layout_marginTop="18dp"-->
+    <!--android:onClick="SetClock2"-->
+    <!--android:visibility="invisible"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintEnd_toStartOf="@+id/textView5"-->
+    <!--app:layout_constraintStart_toEndOf="@+id/textView4"-->
+    <!--app:layout_constraintTop_toBottomOf="@+id/switch2"-->
+    <!--app:layout_constraintVertical_bias="0.0" />-->
 
     <TextView
         android:id="@+id/textView5"
@@ -96,39 +95,65 @@
         app:layout_constraintTop_toBottomOf="@+id/switch2"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextClock
-        android:id="@+id/textClock3"
-        android:layout_width="77dp"
-        android:layout_height="27dp"
-        android:layout_marginBottom="382dp"
-        android:layout_marginEnd="46dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="18dp"
-        android:freezesText="true"
-        android:onClick="SetClock3"
-        android:visibility="invisible"
+    <!--<TextClock-->
+    <!--android:id="@+id/textClock3"-->
+    <!--android:layout_width="77dp"-->
+    <!--android:layout_height="27dp"-->
+    <!--android:layout_marginBottom="382dp"-->
+    <!--android:layout_marginEnd="46dp"-->
+    <!--android:layout_marginStart="8dp"-->
+    <!--android:layout_marginTop="18dp"-->
+    <!--android:format12Hour="hh:mm"-->
+    <!--android:onClick="SetClock3"-->
+    <!--android:visibility="invisible"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintHorizontal_bias="1.0"-->
+    <!--app:layout_constraintStart_toStartOf="parent"-->
+    <!--app:layout_constraintTop_toBottomOf="@+id/switch2"-->
+    <!--app:layout_constraintVertical_bias="0.0" />-->
+
+    <TextView
+        android:id="@+id/test1"
+        android:layout_width="81dp"
+        android:layout_height="25dp"
+        android:onClick="SetClock2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.33"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switch2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.24000001" />
+
+    <TextView
+        android:id="@+id/test2"
+        android:layout_width="81dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:onClick="SetClock3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.242" />
 
     <!--<Button-->
-        <!--android:id="@+id/button"-->
-        <!--style="@style/Widget.AppCompat.Button"-->
-        <!--android:layout_width="176dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--android:text="@string/save"-->
-        <!--android:onClick="saving"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintVertical_bias="0.932" />-->
+    <!--android:id="@+id/button"-->
+    <!--style="@style/Widget.AppCompat.Button"-->
+    <!--android:layout_width="176dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="8dp"-->
+    <!--android:layout_marginEnd="8dp"-->
+    <!--android:layout_marginStart="8dp"-->
+    <!--android:layout_marginTop="8dp"-->
+    <!--android:text="@string/save"-->
+    <!--android:onClick="saving"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintStart_toStartOf="parent"-->
+    <!--app:layout_constraintTop_toTopOf="parent"-->
+    <!--app:layout_constraintVertical_bias="0.932" />-->
 
 </android.support.constraint.ConstraintLayout>

@@ -20,6 +20,7 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Set;
 
 public class SettingsActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener{
@@ -29,6 +30,8 @@ public class SettingsActivity extends AppCompatActivity implements CompoundButto
     private Calendar dateAndTime1;
     private Calendar dateAndTime2;
     Switch switcher;
+    TextView test1;
+    TextView test2;
     Switch switcher2;
     long tm;
     TextClock tcl;
@@ -50,10 +53,13 @@ public class SettingsActivity extends AppCompatActivity implements CompoundButto
 
          switcher = (Switch) findViewById(R.id.switch1);
          switcher2 = (Switch) findViewById(R.id.switch2);
-
+        test1 = (TextView) findViewById(R.id.test1);
+        test2 = (TextView) findViewById(R.id.test2);
         switcher.setOnCheckedChangeListener(this);
         switcher2.setOnCheckedChangeListener(this);
         sPref = getSharedPreferences("MyPref", MODE_PRIVATE);
+
+
 
         int dsa = sPref.getInt("kod1",0);
         if(dsa == 1){
@@ -68,11 +74,15 @@ public class SettingsActivity extends AppCompatActivity implements CompoundButto
             dateAndTime2.setTimeInMillis(tm);
 
             tm = sPref.getLong("dateAndTime1", 0L);
-            dateAndTime1 = Calendar.getInstance();
+           dateAndTime1 = Calendar.getInstance();
             dateAndTime1.setTimeInMillis(tm);
             switcher2.setChecked(true);
+            SetTime(1);
 
+            SetTime(2);
         }else{
+
+
 
             dateAndTime1 = Calendar.getInstance();
             dateAndTime2 = Calendar.getInstance();
@@ -100,10 +110,13 @@ public class SettingsActivity extends AppCompatActivity implements CompoundButto
                 tv4.setVisibility(View.VISIBLE);
                 tv4 = findViewById(R.id.textView5);
                 tv4.setVisibility(View.VISIBLE);
-                 tcl = (TextClock) findViewById(R.id.textClock2);
-                tcl.setVisibility(View.VISIBLE);
-                tcl2 = findViewById(R.id.textClock3);
-                tcl2.setVisibility(View.VISIBLE);
+                test1.setVisibility(View.VISIBLE);
+                test2.setVisibility(View.VISIBLE);
+//                 tcl = (TextClock) findViewById(R.id.textClock2);
+//                tcl.setVisibility(View.VISIBLE);
+//                tcl2 = findViewById(R.id.textClock3);
+//                tcl2.setVisibility(View.VISIBLE);
+
                 SetTime(1);
                 SetTime(2);
                 }
@@ -114,10 +127,14 @@ public class SettingsActivity extends AppCompatActivity implements CompoundButto
                 tv4.setVisibility(View.INVISIBLE);
                 tv4 = findViewById(R.id.textView5);
                 tv4.setVisibility(View.INVISIBLE);
-                tcl = (TextClock) findViewById(R.id.textClock2);
-                tcl.setVisibility(View.INVISIBLE);
-                tcl2 = findViewById(R.id.textClock3);
-                tcl2.setVisibility(View.INVISIBLE);
+//                tcl = (TextClock) findViewById(R.id.textClock2);
+//                tcl.setVisibility(View.INVISIBLE);
+//                tcl2 = findViewById(R.id.textClock3);
+//                tcl2.setVisibility(View.INVISIBLE);
+                test1.setVisibility(View.INVISIBLE);
+                test2.setVisibility(View.INVISIBLE);
+                dateAndTime1 = Calendar.getInstance();
+                dateAndTime2 = Calendar.getInstance();
             }
                 break;
        }
@@ -127,14 +144,18 @@ public class SettingsActivity extends AppCompatActivity implements CompoundButto
 
 
     public void SetTime(int i){
-        if(i==1){
-            tcl.setText(DateUtils.formatDateTime(this,
-                    dateAndTime1.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME));
-        }
-        else if(i==2){
-            tcl2.setText(DateUtils.formatDateTime(this,
-                    dateAndTime2.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME));
-        }
+//        if(i==1){
+//            tcl.setText(DateUtils.formatDateTime(this,
+//                    dateAndTime1.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME));
+//        }
+//        else if(i==2){
+//            tcl2.setText(DateUtils.formatDateTime(this,
+//                    dateAndTime2.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME));
+//        }
+        if(i==1)
+        test1.setText(DateUtils.formatDateTime(this,dateAndTime1.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME));
+        else if(i==2)
+            test2.setText(DateUtils.formatDateTime(this,dateAndTime2.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME));
     }
 
     public void SetClock2(View v){
@@ -210,6 +231,7 @@ public class SettingsActivity extends AppCompatActivity implements CompoundButto
                 this.finish();
                 return true;
             default:
+                saving();
                 return super.onOptionsItemSelected(item);
         }
     }
