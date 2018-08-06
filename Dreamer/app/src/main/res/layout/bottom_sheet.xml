@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_sheet"
     android:layout_width="match_parent"
-    android:layout_height="340dp"
+    android:layout_height="310dp"
     android:background="@android:color/holo_blue_dark"
     android:orientation="vertical"
     app:behavior_hideable="false"
@@ -48,7 +48,7 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="70dp"
+            android:layout_width="wrap_content"
             android:layout_height="44dp"
             android:layout_marginBottom="148dp"
             android:layout_marginEnd="8dp"
@@ -58,15 +58,15 @@
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.003"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etName"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <Spinner
             android:id="@+id/spinner"
-            android:layout_width="238dp"
-            android:layout_height="0dp"
+            android:layout_width="202dp"
+            android:layout_height="34dp"
             android:layout_marginBottom="161dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="22dp"
@@ -75,7 +75,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etName" />
+            app:layout_constraintTop_toBottomOf="@+id/etName"
+            app:layout_constraintVertical_bias="0.35000002" />
 
         <!--<TextView-->
         <!--android:id="@+id/currentDateTime"-->
@@ -142,7 +143,7 @@
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.917" />
+            app:layout_constraintVertical_bias="0.83" />
 
     </android.support.constraint.ConstraintLayout>
 

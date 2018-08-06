@@ -276,13 +276,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+
+    public void ToSettings(View view) {
         // Handle presses on the action bar items
 
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
-        return true;
+
     }
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
