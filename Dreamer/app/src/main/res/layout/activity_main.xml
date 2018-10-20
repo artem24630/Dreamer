@@ -4,17 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
-    tools:context="ru.atproduction.dreamer.MainActivity"
-    tools:menu="main">
+    android:background="#4CAFD9"
+    tools:context="ru.atproduction.dreamer.MainActivity">
 
+
+    <Button
+        android:id="@+id/TestDreamButton"
+        android:layout_width="135dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/holo_blue_bright"
+        android:onClick="BtnCLick"
+
+        android:text="@string/dream"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.812" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="382dp"
         android:layout_height="313dp"
         android:layout_marginBottom="8dp"
-        android:alpha="0.25"
+
 
         android:contentDescription="@string/cloud"
         android:scaleType="centerCrop"
@@ -27,24 +46,31 @@
         app:layout_constraintStart_toEndOf="@+id/listView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3"
-        app:srcCompat="@drawable/clouds" />
+        app:layout_constraintVertical_bias="0.186"
+        app:srcCompat="@drawable/backgr" />
 
 
     <ListView
         android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:layout_height="431dp"
+        android:layout_width="wrap_content"
+        android:layout_height="115dp"
+        android:divider="@color/transparent"
+
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.301" />
+        app:layout_constraintVertical_bias="0.584" />
 
     <include
         android:id="@+id/include"
-        layout="@layout/activity_bottom_sheet" />
+        layout="@layout/activity_bottom_sheet"
+        android:layout_height="560dp"
+        android:visibility="invisible"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="-49dp" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -61,6 +87,59 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.00999999"
         app:srcCompat="@mipmap/ic_action_gear" />
+
+    <EditText
+        android:id="@+id/Test1"
+        android:layout_width="334dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:hint="@string/put_your_dream_here"
+        android:inputType="textPersonName"
+        android:onClick="onClickDream"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.537" />
+
+    <Spinner
+        android:id="@+id/TestSpinner"
+        android:layout_width="168dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:entries="@array/frequency_arr"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/include"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.652" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="286dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/include"
+        app:layout_constraintHorizontal_bias="0.426"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.53" />
 
 
 </android.support.constraint.ConstraintLayout>

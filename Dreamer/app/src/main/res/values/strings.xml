@@ -22,4 +22,6 @@
     <string name="save">Save</string>
     <string name="cloud">cloud</string>
     <string name="settings">Settings</string>
+    <string name="only_1_dream_in_free_app">Only 1 dream in free app</string>
+    <string name="put_your_dream_here">Put your dream here</string>
 </resources>

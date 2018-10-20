@@ -4,25 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_sheet"
     android:layout_width="match_parent"
-    android:layout_height="310dp"
-    android:background="@android:color/holo_blue_dark"
+    android:layout_height="300dp"
+
     android:orientation="vertical"
     app:behavior_hideable="false"
-    app:behavior_peekHeight="80dp"
+
+    app:behavior_peekHeight="70dp"
     app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white">
+
+        android:background="#ffffff">
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
-
+            android:background="#ffffff"
             android:layout_height="80dp"
             android:layout_marginBottom="260dp"
-            android:background="@android:color/white"
+
             android:gravity="center"
             android:text="@string/swipe_up"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -32,13 +34,13 @@
 
         <EditText
             android:id="@+id/etName"
-            android:layout_width="363dp"
-            android:layout_height="46dp"
+            android:layout_width="353dp"
+            android:layout_height="44dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
             android:ems="10"
             android:hint="@string/name_hint"
-            android:inputType="textPersonName"
+            android:inputType="text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -144,6 +146,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.83" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="29dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="220dp"
+            android:layout_marginStart="163dp"
+            android:layout_marginTop="275dp"
+            android:text="@string/only_1_dream_in_free_app"
+            android:textSize="10pt"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.378"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
     </android.support.constraint.ConstraintLayout>
 

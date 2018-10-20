@@ -41,6 +41,11 @@ public class AlarmReciever extends BroadcastReceiver {
     long time1;
     long time2;
     Calendar tm1;
+    long minute1;
+    long hours1;
+
+    long minute2;
+    long hours2;
     Calendar tm2;
     AlarmManager am;
 
@@ -54,11 +59,21 @@ public class AlarmReciever extends BroadcastReceiver {
 
         if(isKodTrue(context,2)){
             loadTm(context);
+
             Calendar stm = Calendar.getInstance();
             stm.setTimeInMillis(System.currentTimeMillis());
-            if((stm.get(Calendar.HOUR)<tm1.get(Calendar.HOUR))&&(stm.get(Calendar.MINUTE)<tm1.get(Calendar.MINUTE))&&(stm.get(Calendar.HOUR)>tm2.get(Calendar.HOUR))&&(stm.get(Calendar.MINUTE)>tm2.get(Calendar.MINUTE)))
-                createNotif(context,intent);
+            int h1 = tm1.get(Calendar.HOUR_OF_DAY);
+            int m1 = tm1.get(Calendar.MINUTE);
+            int h2 = tm2.get(Calendar.HOUR_OF_DAY);
+            int m2 = tm2.get(Calendar.MINUTE);
 
+           if((h1>=h2)&&(m1>=m2)) {
+               if ((stm.get(Calendar.HOUR_OF_DAY) <= h1) && (stm.get(Calendar.MINUTE) < m1) && (stm.get(Calendar.HOUR_OF_DAY) >= h2) && (stm.get(Calendar.MINUTE) > m2))
+                   createNotif(context, intent);
+           }
+           else
+               if(((stm.get(Calendar.HOUR_OF_DAY) <= h1) && (stm.get(Calendar.MINUTE) < m1)) || ((stm.get(Calendar.HOUR_OF_DAY) >= h2) && (stm.get(Calendar.MINUTE) > m2)))
+                   createNotif(context,intent);
         }
         else
             createNotif(context,intent);
@@ -198,8 +213,11 @@ public class AlarmReciever extends BroadcastReceiver {
         tm2 = Calendar.getInstance();
         tm1.setTimeInMillis(sPref.getLong("dateAndTime1",0));
         tm2.setTimeInMillis(sPref.getLong("dateAndTime2",0));
-        time1 = sPref.getLong("dateAndTime1",0);
-        time2 = sPref.getLong("dateAndTime2",0);
+        minute1 = tm1.get(Calendar.MINUTE);
+        hours1 = tm1.get(Calendar.HOUR);
+
+        minute2 = tm2.get(Calendar.MINUTE);
+        hours2 = tm2.get(Calendar.HOUR);
     }
 
 

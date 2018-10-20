@@ -50,6 +50,7 @@ public class DB {
         return mDB.query(DB_TABLE, null, null, null, null, null, null);
     }
 
+
     public int getIdRow(String name){
         Cursor cursor = mDB.rawQuery("SELECT * FROM " +DB_TABLE+ " WHERE name = ?",new String[] {name});
         int id=-1;

@@ -1,43 +1,29 @@
 package ru.atproduction.dreamer;
 
-import android.app.TimePickerDialog;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Environment;
 import android.support.v4.app.LoaderManager;
-import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.NumberPicker;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 
@@ -48,11 +34,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
   //  Button btn;
     private AlarmReciever alarm;
     EditText etName;
+    private int reg;
+    Button tstBtn;
+    Spinner tstSpinner;
     private static final int CM_DELETE_ID = 1;
     SimpleCursorAdapter userAdapter;
     DB db;
     android.support.v4.widget.SimpleCursorAdapter scAdapter;
     ListView lvData;
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,22 +50,46 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
 //        btn = (Button) findViewById(R.id.timeButton);
 //        btn.setEnabled(false);
-        SharedPreferences sp = getSharedPreferences("MyPref", MODE_PRIVATE);
 
+        tstBtn = (Button) findViewById(R.id.TestDreamButton);
+        tstBtn.setVisibility(View.INVISIBLE);
+        tstSpinner = (Spinner) findViewById(R.id.TestSpinner);
+        tstSpinner.setVisibility(View.INVISIBLE);
+        TextView txv = (TextView) findViewById(R.id.textView3);
+        txv.setVisibility(View.INVISIBLE);
+        spin = (Spinner) findViewById(R.id.spinner);
+
+        spin.setSelection(0);
+        spin.setOnItemSelectedListener(this);
+        etName = (EditText) findViewById(R.id.Test1);//etName
+        sp = getSharedPreferences("MyPref", MODE_PRIVATE);
+        lvData = (ListView) findViewById(R.id.listView);
 
 
 
         // проверяем, первый ли раз открывается программа
         boolean hasVisited = sp.getBoolean("hasVisited", false);
 
+
+
         if (!hasVisited) {
 
             SharedPreferences.Editor ed = sp.edit();
             ed.putBoolean("hasVisited", true);
             ed.putInt("kod1",0);
+            ed.putInt("reg",0);
             ed.putInt("kod2",0);
+            ed.putBoolean("dream",false);
             ed.commit();
+
         }
+        reg = sp.getInt("reg",0);
+
+
+//        if(reg==0)
+//            unlimited();
+//        else
+//            limit();
 
 
 
@@ -86,10 +100,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         alarm = new AlarmReciever();
 
-        spin = (Spinner) findViewById(R.id.spinner);
 
-        spin.setSelection(0);
-        spin.setOnItemSelectedListener(this);
 
 
 
@@ -106,9 +117,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         // создаем адаптер и настраиваем список
         scAdapter = new android.support.v4.widget.SimpleCursorAdapter(this, R.layout.item, null, from, to, 0);
-        lvData = (ListView) findViewById(R.id.listView);
+
 
         lvData.setAdapter(scAdapter);
+        if(sp.getBoolean("dream",false)){
+            lvData.setVisibility(View.VISIBLE);
+            InvisibleElem();
+            etName.setVisibility(View.INVISIBLE);
+        }
+        else{
+            lvData.setVisibility(View.INVISIBLE);
+            etName.setVisibility(View.VISIBLE);
+        }
 
 
         // добавляем контекстное меню к списку
@@ -174,13 +194,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void BtnCLick(View view) {
-        etName = (EditText) findViewById(R.id.etName);
+        etName = (EditText) findViewById(R.id.Test1);//etName
         String name = etName.getText().toString();
 
 
 
             if(name!="") {
-                int timeT = spin.getSelectedItemPosition();
+                int timeT = tstSpinner.getSelectedItemPosition();//spin
 
 
                 String tm = "every 15 min";
@@ -202,17 +222,23 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         break;
                 }
                 int id = (int) db.addRec(tm, name);
-                Toast toast2 = Toast.makeText(getApplicationContext(),
-                        " "+name, Toast.LENGTH_SHORT);
-                toast2.show();
+//                Toast toast2 = Toast.makeText(getApplicationContext(),
+//                        " "+name, Toast.LENGTH_SHORT);
+             //   toast2.show();
                 startRepeatingTimer(id, timeT, name);
                 // получаем новый курсор с данными
                 getSupportLoaderManager().getLoader(0).forceLoad();
 
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        "Alarm has been set up", Toast.LENGTH_SHORT);
-                toast.show();
+                SharedPreferences.Editor ed = sp.edit();
+                ed.putBoolean("dream",true);
+                ed.commit();
+
+
                 etName.setText(null);
+                etName.setVisibility(View.INVISIBLE);
+                lvData.setVisibility(View.VISIBLE);
+                InvisibleElem();
+                limit();
             }
             else{
                 Toast toast2 = Toast.makeText(getApplicationContext(),
@@ -225,15 +251,46 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
     }
+    private void unlimited(){
+        SharedPreferences.Editor ed = sp.edit();
+        ed.putInt("reg",0);
+        ed.commit();
+        Button drB = (Button) findViewById(R.id.DreamButton);
+        drB.setEnabled(true);
+        TextView txv = (TextView) findViewById(R.id.textView3);
+        txv.setVisibility(View.INVISIBLE);
+        etName.setEnabled(true);
+        spin.setEnabled(true);
+
+    }
+
+    private void limit(){
+        SharedPreferences.Editor ed = sp.edit();
+        ed.putInt("reg",1);
+        ed.commit();
+        Button drB = (Button) findViewById(R.id.DreamButton);
+        drB.setEnabled(false);
+        TextView txv = (TextView) findViewById(R.id.textView3);
+        txv.setVisibility(View.VISIBLE);
+        etName.setEnabled(false);
+        spin.setEnabled(false);
+
+    }
+
 
     public void onCreateContextMenu(ContextMenu menu, View v,
                                     ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         menu.add(0, CM_DELETE_ID, 0, R.string.delete_record);
+
     }
 
     public boolean onContextItemSelected(MenuItem item) {
         if (item.getItemId() == CM_DELETE_ID) {
+
+            SharedPreferences.Editor ed = sp.edit();
+            ed.putBoolean("dream",false);
+            ed.commit();
             // получаем из пункта контекстного меню данные по пункту списка
             AdapterView.AdapterContextMenuInfo acmi = (AdapterView.AdapterContextMenuInfo) item
                     .getMenuInfo();
@@ -257,6 +314,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             getSupportLoaderManager().getLoader(0).forceLoad();
             cancelRepeatingTimer(a,nm,ids);
             }
+
+            unlimited();
+
+            lvData.setVisibility(View.INVISIBLE);
+            etName.setVisibility(View.VISIBLE);
+
             return true;
         }
         return super.onContextItemSelected(item);
@@ -267,6 +330,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         // закрываем подключение при выходе
         db.close();
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -294,9 +358,26 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         scAdapter.swapCursor(cursor);
     }
 
+    public void onClickDream(View view){
+        VisibleElem();
+
+    }
+
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
     }
+
+    public void VisibleElem() {
+        tstBtn.setVisibility(View.VISIBLE);
+        tstSpinner.setVisibility(View.VISIBLE);
+    }
+
+    public void InvisibleElem(){
+        tstBtn.setVisibility(View.INVISIBLE);
+        tstSpinner.setVisibility(View.INVISIBLE);
+
+    }
+
 
     static class MyCursorLoader extends CursorLoader {
 
